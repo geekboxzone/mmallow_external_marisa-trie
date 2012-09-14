@@ -1,8 +1,6 @@
 #ifndef MARISA_KEY_H_
 #define MARISA_KEY_H_
 
-#include "string.h"
-
 namespace marisa {
 
 template <typename T>

@@ -14,3 +14,6 @@ Homepage: http://code.google.com/p/marisa-trie/
 Local Modifications:
 - Remove files under vs2008/ as we don't need to build under
   visual studio.
+- Changes to string.h to avoid a header collision with the C
+  standard header with the same name.
+- Apply patch 30551945 from alexgru to fix a critical bug.

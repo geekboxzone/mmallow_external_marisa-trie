@@ -1,7 +1,7 @@
 #ifndef MARISA_TAIL_H_
 #define MARISA_TAIL_H_
 
-#include "string.h"
+#include "marisa-string.h"
 #include "vector.h"
 
 namespace marisa {

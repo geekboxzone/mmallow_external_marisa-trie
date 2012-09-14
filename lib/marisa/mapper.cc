@@ -22,7 +22,7 @@ Mapper::Mapper()
 Mapper::Mapper(const void *ptr, std::size_t size)
     : ptr_(ptr), origin_(NULL), avail_(size), size_(0),
       file_(NULL), map_(NULL) {
-  MARISA_THROW_IF((ptr != NULL) && (size != 0), MARISA_PARAM_ERROR);
+  MARISA_THROW_IF((ptr == NULL) || (size == 0), MARISA_PARAM_ERROR);
 }
 #else  // defined _WIN32 || defined _WIN64
 Mapper::Mapper()
@@ -30,7 +30,7 @@ Mapper::Mapper()
 
 Mapper::Mapper(const void *ptr, std::size_t size)
     : ptr_(ptr), origin_(MAP_FAILED), avail_(size), size_(0), fd_(-1) {
-  MARISA_THROW_IF((ptr != NULL) && (size != 0), MARISA_PARAM_ERROR);
+  MARISA_THROW_IF((ptr == NULL) || (size == 0), MARISA_PARAM_ERROR);
 }
 #endif  // defined _WIN32 || defined _WIN64
 
