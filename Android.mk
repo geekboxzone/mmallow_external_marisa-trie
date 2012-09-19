@@ -35,8 +35,6 @@ LOCAL_SRC_FILES := lib/marisa/base.cc \
 	lib/marisa/trie-c.cc \
 	lib/marisa/writer.cc
 
-$(info $(LOCAL_SRC_FILES))
-
 LOCAL_MODULE := libmarisa-trie
 
 LOCAL_SDK_VERSION := 14
