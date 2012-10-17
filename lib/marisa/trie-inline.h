@@ -179,7 +179,7 @@ inline bool Trie::find_child(UInt32 &node, T query,
 }
 
 template <typename T, typename U>
-std::size_t Trie::find_callback_(T query, U callback) const try {
+std::size_t Trie::find_callback_(T query, U callback) const {
   std::size_t count = 0;
   UInt32 node = 0;
   std::size_t pos = 0;
@@ -192,10 +192,6 @@ std::size_t Trie::find_callback_(T query, U callback) const try {
     }
   } while (!query.ends_at(pos) && find_child<T>(node, query, pos));
   return count;
-} catch (const std::bad_alloc &) {
-  MARISA_THROW(MARISA_MEMORY_ERROR);
-} catch (const std::length_error &) {
-  MARISA_THROW(MARISA_SIZE_ERROR);
 }
 
 template <typename T>
@@ -235,7 +231,7 @@ inline bool Trie::predict_child(UInt32 &node, T query, std::size_t &pos,
 }
 
 template <typename T, typename U>
-std::size_t Trie::predict_callback_(T query, U callback) const try {
+std::size_t Trie::predict_callback_(T query, U callback) const {
   std::string key;
   UInt32 node = 0;
   std::size_t pos = 0;
@@ -299,10 +295,6 @@ std::size_t Trie::predict_callback_(T query, U callback) const try {
     ++stack_pos;
   }
   return count;
-} catch (const std::bad_alloc &) {
-  MARISA_THROW(MARISA_MEMORY_ERROR);
-} catch (const std::length_error &) {
-  MARISA_THROW(MARISA_SIZE_ERROR);
 }
 
 inline UInt32 Trie::key_id_to_node(UInt32 key_id) const {

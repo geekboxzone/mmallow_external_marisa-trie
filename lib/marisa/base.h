@@ -13,6 +13,10 @@
 #include <stddef.h>
 #endif  // __cplusplus
 
+#if defined(__ANDROID__)
+#include <android/log.h>
+#endif  // __ANDROID__
+
 #ifdef __cplusplus
 extern "C" {
 #endif  // __cplusplus
@@ -183,8 +187,22 @@ class Exception {
 };
 
 // MARISA_THROW adds a filename and a line number to an exception.
+#if !defined(__ANDROID__)
 #define MARISA_THROW(status) \
   (throw Exception(__FILE__, __LINE__, status))
+#else
+
+inline int android_log_exception(int status) {
+  char tmpbuf[100];
+  snprintf(tmpbuf, sizeof(tmpbuf), "marisa exception: %d", status);
+  __android_log_write(ANDROID_LOG_ERROR, "marisa-trie", tmpbuf);
+  return 0;
+}
+
+#define MARISA_THROW(status) \
+  (android_log_exception(status))
+
+#endif  // __ANDROID__
 
 // MARISA_THROW_IF throws an exception with `status' if `cond' is true.
 #define MARISA_THROW_IF(cond, status) \

@@ -63,15 +63,9 @@ void Trie::build_trie(Vector<Key<String> > &keys,
     build_trie(keys, static_cast<UInt32 *>(NULL), flags);
     return;
   }
-  try {
-    std::vector<UInt32> temp_key_ids(keys.size());
-    build_trie(keys, temp_key_ids.empty() ? NULL : &temp_key_ids[0], flags);
-    key_ids->swap(temp_key_ids);
-  } catch (const std::bad_alloc &) {
-    MARISA_THROW(MARISA_MEMORY_ERROR);
-  } catch (const std::length_error &) {
-    MARISA_THROW(MARISA_SIZE_ERROR);
-  }
+  std::vector<UInt32> temp_key_ids(keys.size());
+  build_trie(keys, temp_key_ids.empty() ? NULL : &temp_key_ids[0], flags);
+  key_ids->swap(temp_key_ids);
 }
 
 void Trie::build_trie(Vector<Key<String> > &keys,
@@ -168,7 +162,7 @@ void Trie::build_trie(Vector<Key<T> > &keys,
 
 template <typename T>
 void Trie::build_cur(Vector<Key<T> > &keys,
-    Vector<UInt32> *terminals, Progress &progress) try {
+    Vector<UInt32> *terminals, Progress &progress) {
   num_keys_ = sort_keys(keys);
   louds_.push_back(true);
   louds_.push_back(false);
@@ -261,10 +255,6 @@ void Trie::build_cur(Vector<Key<T> > &keys,
 
   build_terminals(keys, terminals);
   keys.swap(&rest_keys);
-} catch (const std::bad_alloc &) {
-  MARISA_THROW(MARISA_MEMORY_ERROR);
-} catch (const std::length_error &) {
-  MARISA_THROW(MARISA_SIZE_ERROR);
 }
 
 void Trie::build_next(Vector<Key<String> > &keys,

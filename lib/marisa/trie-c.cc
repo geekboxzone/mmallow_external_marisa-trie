@@ -79,106 +79,88 @@ marisa_status marisa_end(marisa_trie *h) {
 
 marisa_status marisa_build(marisa_trie *h, const char * const *keys,
     size_t num_keys, const size_t *key_lengths, const double *key_weights,
-    marisa_uint32 *key_ids, int flags) try {
+    marisa_uint32 *key_ids, int flags) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.build(keys, num_keys, key_lengths, key_weights, key_ids, flags);
   h->mapper.clear();
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_mmap(marisa_trie *h, const char *filename,
-    long offset, int whence) try {
+    long offset, int whence) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.mmap(&h->mapper, filename, offset, whence);
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
-marisa_status marisa_map(marisa_trie *h, const void *ptr, size_t size) try {
+marisa_status marisa_map(marisa_trie *h, const void *ptr, size_t size) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.map(ptr, size);
   h->mapper.clear();
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_load(marisa_trie *h, const char *filename,
-    long offset, int whence) try {
+    long offset, int whence) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.load(filename, offset, whence);
   h->mapper.clear();
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
-marisa_status marisa_fread(marisa_trie *h, FILE *file) try {
+marisa_status marisa_fread(marisa_trie *h, FILE *file) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.fread(file);
   h->mapper.clear();
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
-marisa_status marisa_read(marisa_trie *h, int fd) try {
+marisa_status marisa_read(marisa_trie *h, int fd) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.read(fd);
   h->mapper.clear();
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_save(const marisa_trie *h, const char *filename,
-    int trunc_flag, long offset, int whence) try {
+    int trunc_flag, long offset, int whence) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.save(filename, trunc_flag != 0, offset, whence);
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
-marisa_status marisa_fwrite(const marisa_trie *h, FILE *file) try {
+marisa_status marisa_fwrite(const marisa_trie *h, FILE *file) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.fwrite(file);
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
-marisa_status marisa_write(const marisa_trie *h, int fd) try {
+marisa_status marisa_write(const marisa_trie *h, int fd) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   }
   h->trie.write(fd);
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_restore(const marisa_trie *h, marisa_uint32 key_id,
-    char *key_buf, size_t key_buf_size, size_t *key_length) try {
+    char *key_buf, size_t key_buf_size, size_t *key_length) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (key_length == NULL) {
@@ -186,12 +168,10 @@ marisa_status marisa_restore(const marisa_trie *h, marisa_uint32 key_id,
   }
   *key_length = h->trie.restore(key_id, key_buf, key_buf_size);
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_lookup(const marisa_trie *h,
-    const char *ptr, size_t length, marisa_uint32 *key_id) try {
+    const char *ptr, size_t length, marisa_uint32 *key_id) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (key_id == NULL) {
@@ -203,14 +183,12 @@ marisa_status marisa_lookup(const marisa_trie *h,
     *key_id = h->trie.lookup(ptr, length);
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_find(const marisa_trie *h,
     const char *ptr, size_t length,
     marisa_uint32 *key_ids, size_t *key_lengths,
-    size_t max_num_results, size_t *num_results) try {
+    size_t max_num_results, size_t *num_results) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (num_results == NULL) {
@@ -223,8 +201,6 @@ marisa_status marisa_find(const marisa_trie *h,
         key_ids, key_lengths, max_num_results);
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_find_first(const marisa_trie *h,
@@ -262,7 +238,7 @@ marisa_status marisa_find_last(const marisa_trie *h,
 marisa_status marisa_find_callback(const marisa_trie *h,
     const char *ptr, size_t length,
     int (*callback)(void *, marisa_uint32, size_t),
-    void *first_arg_to_callback) try {
+    void *first_arg_to_callback) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (callback == NULL) {
@@ -276,8 +252,6 @@ marisa_status marisa_find_callback(const marisa_trie *h,
         ::FindCallback(callback, first_arg_to_callback));
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_predict(const marisa_trie *h,
@@ -289,7 +263,7 @@ marisa_status marisa_predict(const marisa_trie *h,
 
 marisa_status marisa_predict_breadth_first(const marisa_trie *h,
     const char *ptr, size_t length, marisa_uint32 *key_ids,
-    size_t max_num_results, size_t *num_results) try {
+    size_t max_num_results, size_t *num_results) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (num_results == NULL) {
@@ -303,13 +277,11 @@ marisa_status marisa_predict_breadth_first(const marisa_trie *h,
         ptr, length, key_ids, NULL, max_num_results);
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_predict_depth_first(const marisa_trie *h,
     const char *ptr, size_t length, marisa_uint32 *key_ids,
-    size_t max_num_results, size_t *num_results) try {
+    size_t max_num_results, size_t *num_results) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (num_results == NULL) {
@@ -323,14 +295,12 @@ marisa_status marisa_predict_depth_first(const marisa_trie *h,
         ptr, length, key_ids, NULL, max_num_results);
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 marisa_status marisa_predict_callback(const marisa_trie *h,
     const char *ptr, size_t length,
     int (*callback)(void *, marisa_uint32, const char *, size_t),
-    void *first_arg_to_callback) try {
+    void *first_arg_to_callback) {
   if (h == NULL) {
     return MARISA_HANDLE_ERROR;
   } else if (callback == NULL) {
@@ -344,8 +314,6 @@ marisa_status marisa_predict_callback(const marisa_trie *h,
         ::PredictCallback(callback, first_arg_to_callback));
   }
   return MARISA_OK;
-} catch (const marisa::Exception &ex) {
-  return ex.status();
 }
 
 size_t marisa_get_num_tries(const marisa_trie *h) {

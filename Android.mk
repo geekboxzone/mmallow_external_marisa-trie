@@ -16,11 +16,9 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/lib/marisa
-LOCAL_CFLAGS += -fexceptions
-LOCAL_CPP_EXTENSION := .cc
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/lib/marisa external/stlport
 
-LOCAL_NDK_STL_VARIANT := gnustl_static
+LOCAL_CPP_EXTENSION := .cc
 
 LOCAL_SRC_FILES := lib/marisa/base.cc \
 	lib/marisa/intvector.cc \
@@ -36,7 +34,7 @@ LOCAL_SRC_FILES := lib/marisa/base.cc \
 	lib/marisa/writer.cc
 
 LOCAL_MODULE := libmarisa-trie
+LOCAL_MODULE_TAGS := optional
 
-LOCAL_SDK_VERSION := 14
-
+include external/stlport/libstlport.mk
 include $(BUILD_STATIC_LIBRARY)

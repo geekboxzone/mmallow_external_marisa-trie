@@ -17,3 +17,4 @@ Local Modifications:
 - Changes to string.h to avoid a header collision with the C
   standard header with the same name.
 - Apply patch 30551945 from alexgru to fix a critical bug.
+- Remove all the exceptions: see <android_diff.txt> for details.

@@ -80,11 +80,7 @@ void Reader::read_data(void *buf, std::size_t size) {
       MARISA_THROW(MARISA_IO_ERROR);
     }
   } else if (stream_ != NULL) {
-    try {
-      if (!stream_->read(static_cast<char *>(buf), size)) {
-        MARISA_THROW(MARISA_IO_ERROR);
-      }
-    } catch (const std::ios_base::failure &) {
+    if (!stream_->read(static_cast<char *>(buf), size)) {
       MARISA_THROW(MARISA_IO_ERROR);
     }
   } else {
