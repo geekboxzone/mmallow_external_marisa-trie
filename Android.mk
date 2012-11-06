@@ -16,7 +16,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/lib/marisa external/stlport
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/lib/marisa
 
 LOCAL_CPP_EXTENSION := .cc
 
@@ -33,8 +33,10 @@ LOCAL_SRC_FILES := lib/marisa/base.cc \
 	lib/marisa/trie-c.cc \
 	lib/marisa/writer.cc
 
-LOCAL_MODULE := libmarisa-trie
+LOCAL_MODULE := libmarisa-trie-gnustl-rtti
 LOCAL_MODULE_TAGS := optional
 
-include external/stlport/libstlport.mk
+LOCAL_NDK_STL_VARIANT := gnustl_static
+LOCAL_SDK_VERSION := 14
+
 include $(BUILD_STATIC_LIBRARY)

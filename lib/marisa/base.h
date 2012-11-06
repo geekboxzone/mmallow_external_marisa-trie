@@ -15,6 +15,7 @@
 
 #if defined(__ANDROID__)
 #include <android/log.h>
+#include <stdio.h>
 #endif  // __ANDROID__
 
 #ifdef __cplusplus
