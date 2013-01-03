@@ -40,3 +40,31 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_SDK_VERSION := 14
 
 include $(BUILD_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/v0_1_5/lib/marisa_alpha
+
+LOCAL_CPP_EXTENSION := .cc
+
+LOCAL_SRC_FILES := v0_1_5/lib/marisa_alpha/base.cc \
+	v0_1_5/lib/marisa_alpha/bitvector.cc \
+	v0_1_5/lib/marisa_alpha/intvector.cc \
+	v0_1_5/lib/marisa_alpha/mapper.cc \
+	v0_1_5/lib/marisa_alpha/progress.cc \
+	v0_1_5/lib/marisa_alpha/reader.cc \
+	v0_1_5/lib/marisa_alpha/tail.cc \
+	v0_1_5/lib/marisa_alpha/trie-build.cc \
+	v0_1_5/lib/marisa_alpha/trie.cc \
+	v0_1_5/lib/marisa_alpha/trie-c.cc \
+	v0_1_5/lib/marisa_alpha/trie-search.cc \
+	v0_1_5/lib/marisa_alpha/writer.cc
+
+LOCAL_MODULE := libmarisa_alpha-trie-gnustl-rtti
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_CFLAGS := -frtti -fexceptions
+LOCAL_NDK_STL_VARIANT := gnustl_static
+LOCAL_SDK_VERSION := 14
+
+include $(BUILD_STATIC_LIBRARY)
